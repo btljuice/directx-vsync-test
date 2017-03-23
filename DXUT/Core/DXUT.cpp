@@ -4371,7 +4371,7 @@ void DXUTApplyDefaultDeviceSettings(DXUTDeviceSettings *modifySettings)
     modifySettings->d3d11.sd.SampleDesc.Quality = 0;
     modifySettings->d3d11.sd.SwapEffect = DXGI_SWAP_EFFECT_DISCARD;
     modifySettings->d3d11.sd.Windowed = TRUE;
-    modifySettings->d3d11.SyncInterval = 0;
+    modifySettings->d3d11.SyncInterval = 1;
 }
 
 

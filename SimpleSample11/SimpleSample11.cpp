@@ -126,7 +126,7 @@ int WINAPI wWinMain( _In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance,
 
     // Only require 10-level hardware, change to D3D_FEATURE_LEVEL_11_0 to require 11-class hardware
     // Switch to D3D_FEATURE_LEVEL_9_x for 10level9 hardware
-    DXUTCreateDevice( D3D_FEATURE_LEVEL_10_0, true, 800, 600 );
+    DXUTCreateDevice( D3D_FEATURE_LEVEL_11_0, true, 800, 600 );
 
     DXUTMainLoop(); // Enter into the DXUT render loop
 
