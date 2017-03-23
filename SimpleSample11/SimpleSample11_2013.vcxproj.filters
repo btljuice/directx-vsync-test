@@ -17,6 +17,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="SimpleSample11.cpp" />
+    <ClCompile Include="FrameStatistics.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="SimpleSample.hlsl">
@@ -33,6 +34,7 @@
     <ResourceCompile Include="SimpleSample.rc">
       <Filter>Resource Files</Filter>
     </ResourceCompile>
+    <ClInclude Include="FrameStatistics.h" />
   </ItemGroup>
   <ItemGroup>
   </ItemGroup>
