@@ -57,7 +57,10 @@ namespace Util
 	class LoopStats
 	{
 	public:
-		LoopStats(unsigned index = 0) : index(index) {}
+		LoopStats(unsigned index = 0) : index(index)
+		{
+			ZeroMemory(&dxgi, sizeof(dxgi));
+		}
 
 		unsigned index = 0;
 		DXGI_FRAME_STATISTICS dxgi;
@@ -85,11 +88,7 @@ namespace Util
 
 		void onRenderBegin() { m_curLoopStats.qpcRenderBeg = qpcNow(); }
 
-		void onPresent()
-		{
-			assert(m_curLoopStats.qpcPresent == kQpcMin);
-			m_curLoopStats.qpcPresent   = qpcNow();
-		}
+		void onPresent(IDXGISwapChain& swap_chain);
 
 		void onPresentWndProc()
 		{

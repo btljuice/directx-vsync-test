@@ -2907,7 +2907,7 @@ void WINAPI DXUTRender3DEnvironment()
 
     // Show the frame on the primary surface.
     hr = pSwapChain->Present( SyncInterval, dwFlags );
-	Util::Profiler::get().onPresent();
+	Util::Profiler::get().onPresent(*pSwapChain);
     if( DXGI_STATUS_OCCLUDED == hr )
     {
         // There is a window covering our entire rendering area.
@@ -4237,6 +4237,12 @@ bool WINAPI DXUTIsVsyncEnabled()
     {
         return true;
     }
+};
+
+bool WINAPI DXUTIsFullScreen()
+{
+    auto deviceSettings = DXUTGetDeviceSettings();
+	return !deviceSettings.d3d11.sd.Windowed;
 };
 
 bool WINAPI DXUTIsKeyDown( _In_ BYTE vKey )

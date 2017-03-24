@@ -322,6 +322,7 @@ LPCWSTR   WINAPI DXUTGetFrameStats( _In_ bool bIncludeFPS = false );
 LPCWSTR   WINAPI DXUTGetDeviceStats();
 
 bool      WINAPI DXUTIsVsyncEnabled();
+bool      WINAPI DXUTIsFullScreen();
 bool      WINAPI DXUTIsRenderingPaused();
 bool      WINAPI DXUTIsTimePaused();
 bool      WINAPI DXUTIsActive();
