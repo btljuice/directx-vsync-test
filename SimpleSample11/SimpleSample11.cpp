@@ -15,6 +15,8 @@
 #include "SDKmesh.h"
 #include "resource.h"
 
+#include "Profiler.h"
+
 #pragma warning( disable : 4100 )
 
 using namespace DirectX;
@@ -129,6 +131,10 @@ int WINAPI wWinMain( _In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance,
     DXUTCreateDevice( D3D_FEATURE_LEVEL_11_0, true, 800, 600 );
 
     DXUTMainLoop(); // Enter into the DXUT render loop
+
+	auto& profiler = Util::Profiler::get();
+
+	profiler.record();
 
     return DXUTGetExitCode();
 }

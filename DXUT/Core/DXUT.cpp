@@ -16,6 +16,8 @@
 #include <dxgidebug.h>
 #endif
 
+#include "..\..\SimpleSample11\Profiler.h"
+
 #define DXUT_MIN_WINDOW_SIZE_X 200
 #define DXUT_MIN_WINDOW_SIZE_Y 200
 #define DXUT_COUNTER_STAT_LENGTH 2048
@@ -1288,6 +1290,7 @@ LRESULT CALLBACK DXUTStaticWndProc( HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM 
 
                         auto pSwapChain = DXUTGetDXGISwapChain();
                         hr = pSwapChain->Present( 0, dwFlags );
+                        Util::Profiler::get().onPresentWndProc();
                         if( DXGI_STATUS_OCCLUDED == hr )
                         {
                             // There is a window covering our entire rendering area.
@@ -1615,14 +1618,19 @@ HRESULT WINAPI DXUTMainLoop( _In_opt_ HACCEL hAccel )
         return DXUT_ERR_MSGBOX( L"DXUTMainLoop", E_FAIL );
     }
 
+
     // Now we're ready to receive and process Windows messages.
     bool bGotMsg;
     MSG msg;
     msg.message = WM_NULL;
     PeekMessage( &msg, nullptr, 0U, 0U, PM_NOREMOVE );
 
+	auto& profiler = Util::Profiler::get();
+	profiler.onInitEnd();
+
     while( WM_QUIT != msg.message )
     {
+
         // Use PeekMessage() so we can use idle time to render the scene. 
         bGotMsg = ( PeekMessage( &msg, nullptr, 0U, 0U, PM_REMOVE ) != 0 );
 
@@ -1638,8 +1646,12 @@ HRESULT WINAPI DXUTMainLoop( _In_opt_ HACCEL hAccel )
         }
         else
         {
+			profiler.onRenderBegin();
+
             // Render a frame during idle time (no messages are waiting)
             DXUTRender3DEnvironment();
+
+			profiler.onNewLoop();
         }
     }
 
@@ -2895,6 +2907,7 @@ void WINAPI DXUTRender3DEnvironment()
 
     // Show the frame on the primary surface.
     hr = pSwapChain->Present( SyncInterval, dwFlags );
+	Util::Profiler::get().onPresent();
     if( DXGI_STATUS_OCCLUDED == hr )
     {
         // There is a window covering our entire rendering area.
